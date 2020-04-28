@@ -1,0 +1,25 @@
+version: "3"
+services:
+    influxdb:
+      image: influxdb
+      ports:
+        - "8086:8086"
+      volumes:
+        - influxdb:/var/lib/influxdb
+    sensor:
+  # use your username instead of mine below!
+      image: gaior/iot_dummy_sensor:v1.0-X86_64
+      links:
+        - influxdb
+    dashboard:
+      image: grafana/grafana
+      links:
+        - sensor
+      ports:
+        - "3000:3000"
+      volumes:
+        - grafana:/var/lib/grafana
+
+volumes:
+    influxdb:
+    grafana:
