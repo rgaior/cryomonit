@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 services:
     influxdb:
       image: influxdb
@@ -6,20 +6,26 @@ services:
         - "8086:8086"
       volumes:
         - influxdb:/var/lib/influxdb
-    sensor:
-  # use your username instead of mine below!
-      image: gaior/iot_dummy_sensor:v1.0-X86_64
-      links:
-        - influxdb
     dashboard:
       image: grafana/grafana
-      links:
-        - sensor
+      # links:
+      #   - sensor
       ports:
         - "3000:3000"
       volumes:
         - grafana:/var/lib/grafana
-
+    
+    sensor:
+  # use your username instead of mine below!
+      image: gaior/iot_dummy_sensor:v1.5-X86_64
+      links:
+        - influxdb
+        - dashboard
+      volumes:
+        - type: bind
+          source: /Users/gaior/DAMIC/code/monitoring/app/testdata
+          target: /data
+    
 volumes:
     influxdb:
     grafana:

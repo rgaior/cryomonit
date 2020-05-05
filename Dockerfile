@@ -10,11 +10,14 @@ WORKDIR /app
 COPY requirements.txt /app/requirements.txt
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
-# Copy the python script
-COPY app.py /app/app.py
+# Copy the python script 
+COPY rundb.py /app/rundb.py
+# Copy utils function
+COPY utils.py  /app/utils.py
 
 # Run app.py when the container launches
 # The -u flag specifies to use the unbuffered ouput.
 # in this way, what's printed by the app is visible on the host
 # while the container is running
-CMD ["python", "-u", "app.py", "influxdb", "8086"]
+#CMD ["bash",]
+#CMD ["python", "-u", "testinotify.py", "influxdb", "8086", "/testdata/", "cryo1", "p", "--reset",]
