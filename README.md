@@ -11,14 +11,19 @@ The format of data is the following:\
         ...\
 
 
-Here are a set of commands to run the app: \
-1. in the docker-compose.yml file: \
+Here are a set of commands to run the app:
+
+1. in the docker-compose.yml file:
+
     change the data source path  \ 
 2. type  \
 docker-compose run -d sensor python3 -u rundb.py influxdb 8086 datafolder tagname measuredvaluename -r tagnametoreset -t Europe/Paris \
-where: \
-    influxdb: is fixed \ 
-    8086: is fixed \
+where: 
+
+influxdb: is fixed
+    
+8086: is fixed
+
     datafolder: is at minimum /data/ but can be /data/anotherfolder if the data you are looking for are in sourcefolder/anotherfolder \
     tagname: is the name of the setup (for instance cryo1, or cryo2 etc) \
     measuredvaluename: is how you want to name the physical parameter measured, for instance P or T  \
