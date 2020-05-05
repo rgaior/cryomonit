@@ -17,13 +17,13 @@ services:
     
     sensor:
   # use your username instead of mine below!
-      image: gaior/iot_dummy_sensor:v1.5-X86_64
+      image: gaior/rundb:v1.0-X86_64
       links:
         - influxdb
         - dashboard
       volumes:
         - type: bind
-          source: /Users/gaior/DAMIC/code/monitoring/app/testdata
+          source: /Users/gaior/DAMIC/code/monitoring/testdata
           target: /data
     
 volumes:

@@ -71,20 +71,20 @@ def get_entries():
 
 
 
-def fill_with_folder(folderpath, setupname, parameter):
+def fill_with_folder(folderpath, setupname, parameter, timezone):
     files = glob.glob(folderpath+'20*')
     for f in files:
         if f.endswith('~') or f.endswith('diff'):
             continue
         with open(f,'r') as infile:
             lines = infile.readlines()
-            fill_dB_with_line(f, lines, setupname, param)
+            fill_dB_with_line(f, lines, setupname, param, timezone)
 # def reset_db(configfile):
 #     listoffolder = 
 
-def fill_dB_with_line(fname, addedlines, setupname, param):
+def fill_dB_with_line(fname, addedlines, setupname, param, timezone):
     for line in addedlines:
-        [meastime, meas] = convert_line(fname, line)
+        [meastime, meas] = convert_line(fname, line, timezone)
         data = [{
             'measurement':measurement,
             'time':meastime,
@@ -145,7 +145,7 @@ if __name__ == '__main__':
     wd = inotify.add_watch(datafolder, watch_flags)
     folder = datafolder
     if options.reset != '':
-        fill_with_folder(folder, setupname, param)
+        fill_with_folder(folder, setupname, param,options.timezone)
     while(True):
         time.sleep(5)
         listofchangedfiles = []
@@ -164,7 +164,7 @@ if __name__ == '__main__':
             print('changedfile  = ' , changedfile)
             addedlines = get_changed_lines(changedfile)
             print ('addedline = ', addedlines)   
-            fill_dB_with_line(changedfile, addedlines, setupname, param)    
+            fill_dB_with_line(changedfile, addedlines, setupname, param, options.timezone)    
 
 
         # for flag in flags.from_mask(event.mask):

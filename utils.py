@@ -8,19 +8,13 @@ def touch(path):
 
 from pytz import timezone
 import pytz
-def convert_line(fname, line):
-    localtz = timezone('Europe/Paris')
-
+def convert_line(fname, line, pytztimezone):
+    localtz = timezone(pytztimezone)
     timeinday = line.split(' ')[0]
-#    print('timeinday 1 = ', timeinday)
     timeinday = timeinday.split(':')
-#    print('timeinday 2 = ', timeinday)
     meas = float(line.split(' ')[1])
-#    print('meas = ', meas)
-    #format of filename : YYYYMMDD
 
     fname = fname[fname.rfind('/')+1:]
-    print ('fname = ', fname)
     meastime = datetime.datetime(
         year = int(fname[:4]), 
         month=int(fname[4:6]),
