@@ -3,6 +3,9 @@ the app is meant for the monitoring of a sensor. It contains several containers:
     - influxdb \
     - grafana \
     - a home made rundb which checks a given data folder and fills the influxdb \
+It is largely inspired from:
+https://thedatafrog.com/en/articles/docker-influxdb-grafana/
+
 The format of data is the following:\ 
     - one file per day with the name YYYYMMDD \
     - in the file one data per line with the format:\
