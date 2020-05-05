@@ -72,6 +72,7 @@ def get_entries():
 
 
 def fill_with_folder(folderpath, setupname, parameter, timezone):
+    ''' glob folder starting with 20 and readlines for each of them'''
     files = glob.glob(folderpath+'20*')
     for f in files:
         if f.endswith('~') or f.endswith('diff'):
@@ -79,10 +80,11 @@ def fill_with_folder(folderpath, setupname, parameter, timezone):
         with open(f,'r') as infile:
             lines = infile.readlines()
             fill_dB_with_line(f, lines, setupname, param, timezone)
-# def reset_db(configfile):
-#     listoffolder = 
 
 def fill_dB_with_line(fname, addedlines, setupname, param, timezone):
+    '''function to convert one string line to a data to be filled in the database
+    the format is the one explained in the readme file
+    '''
     for line in addedlines:
         [meastime, meas] = convert_line(fname, line, timezone)
         data = [{
@@ -97,14 +99,6 @@ def fill_dB_with_line(fname, addedlines, setupname, param, timezone):
             }]
         client.write_points(data)
         pprint.pprint(data)
-#        time.sleep(1)
-
-
-# def get_last_changed_file(folder):
- 
-#     inotify = INotify() 
-#     watch_flags = flags.CREATE | flags.DELETE | flags.MODIFY | flags.DELETE_SELF
-#     wd = inotify.add_watch(folder, watch_flags)
 
 if __name__ == '__main__':
     import sys

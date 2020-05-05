@@ -8,7 +8,7 @@ The format of data is the following:
         HH:MM:SS value
         HH:MM:SS value
         ...
-        
+
 Here are a set of commands to run the app:
 1. in the docker-compose.yml file:
     change the data source path 
@@ -23,4 +23,8 @@ where:
     tagnametoreset: this option allows you to reset the data with the given tag name and rewrite all the files present in the data folder 
                     the option all removes all the tags
     timezone: Paris time by default so you really want to change that if you don't have the chance to work there !
-              The string you need to provide is the pytz list for instance: America/Chicago or UTC
+              The string you need to provide is the pytz list for instance: America/Chicago or UTC 
+               to print all of them type in a python terminal: 
+                import pytz
+                for tz in pytz.all_timezones:
+                    print tz
